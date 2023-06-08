@@ -29,23 +29,22 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-        // $url = "";
-        $route = "";
+        $url = "";
 
         if (Auth::user()->role === 'admin') {
-            // $url = 'admin/dashboard';
-            $route = Route('admin.dashboard');
+            $url = 'admin/dashboard';
+
         }
         else if(Auth::user()->role === 'vendor'){
-            // $url = 'vendor/dashboard';
-            $route = Route('vendor.dashboard');
+            $url = 'vendor/dashboard';
+
         }
         else if(Auth::user()->role === 'user'){
-            // $url = '/dashboard';
-            $route = Route('dashboard');
+            $url = '/dashboard';
+
         }
 
-        return redirect()->intended($route);
+        return redirect()->intended($url);
     }
 
     /**

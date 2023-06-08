@@ -35,10 +35,21 @@ Route::middleware('auth', 'verified', 'role:admin')->group(function () {
 });
 
 // Admin Routes Here
-Route::middleware('auth', 'verified', 'role:admin')->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'Index'])->name('admin.dashboard');
 
-});
+    // Admin Route With Login
+    Route::middleware('auth', 'verified', 'role:admin')->group(function () {
+        Route::get('/admin/dashboard', [AdminController::class, 'Index'])->name('admin.dashboard');
+    // Admin Log In Route
+    Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
+    });
+
+    // Admin Route Without Login
+    Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
+    Route::get('/admin/registration', [AdminController::class, 'registration'])->name('admin.registration');
+
+
+
 // Vendor Routes Here
 
     // Vendor With LogIn Routes

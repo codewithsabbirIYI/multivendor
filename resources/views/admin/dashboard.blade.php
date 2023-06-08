@@ -1,1 +1,6 @@
-<h1>Admin Dashboar</h1>
+@extends('admin.master')
+@section('content')
+
+    <h2>Welcome Admin</h2>
+
+@endsection
