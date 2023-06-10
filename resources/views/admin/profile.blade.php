@@ -110,12 +110,14 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">
+                            <form action="{{ Route('admin.profile.update', $adminInfo->id) }}" method="post" enctype="multipart/form-data">
+                                @csrf
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Full Name</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" value="{{ $adminInfo->name }}" >
+                                    <input type="text" class="form-control" value="{{ $adminInfo->name }}" name="name">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -123,7 +125,7 @@
                                     <h6 class="mb-0">UserName</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" value="{{ $adminInfo->username }}" placeholder="Your Username">
+                                    <input type="text" class="form-control" value="{{ $adminInfo->username }}" placeholder="Your Username" name="username">
                                 </div>
                             </div>`
                             <div class="row mb-3">
@@ -131,7 +133,7 @@
                                     <h6 class="mb-0">Email</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" value="{{ $adminInfo->email }}">
+                                    <input type="text" class="form-control" value="{{ $adminInfo->email }}" name="email">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -140,7 +142,7 @@
                                 </div>
 
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" value="{{ $adminInfo->phone }}" placeholder="Your Username">
+                                    <input type="text" class="form-control" value="{{ $adminInfo->phone }}" placeholder="Your Username" phone = "phone">
                                 </div>
                             </div>
 
@@ -149,15 +151,30 @@
                                     <h6 class="mb-0">Address</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" value="" placeholder="Your Address">
+                                    <input type="text" class="form-control" value="" placeholder="Your Address" name="address">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Photo</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="file" class="form-control adminImage" value="" placeholder="Your photo" name="adminImage">
+                                    <img src="
+                                        {{-- default image or admin image show here  --}}
+                                        {{ ( empty(Auth::user()->photo)? asset('uploads/admin/default user photo.png') : asset('u u ploads/admin/'.Auth::user()->photo)); }}
+
+                                    " class="my-2 imagePreview" alt="user avatar" name = "imagePreview" width="200">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="button" class="btn btn-primary px-4" value="Save Changes">
+                                    <input type="submit" class=" btn btn-primary px-4" value="Save Changes" name="submit">
                                 </div>
                             </div>
+                        </form>
                         </div>
                     </div>
                     <div class="row">

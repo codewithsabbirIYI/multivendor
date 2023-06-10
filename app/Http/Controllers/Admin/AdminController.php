@@ -9,6 +9,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use File;
+use Illuminate\Support\Facades\File as FacadesFile;
+use Image;
 class AdminController extends Controller
 {
     /**
@@ -35,6 +38,29 @@ class AdminController extends Controller
         $adminInfo = User::find(Auth::user()->id);
         return view('admin.profile', compact('adminInfo'));
     }
+
+    public function profileUpdate(Request $request , $id){
+        $admin = User::find($id);
+        $admin->name = $request->name;
+        $admin->username = $request->username;
+        $admin->email = $request->email;
+        $admin->phone = $request->phone;
+        $admin->address = $request->address;
+
+        if($request->adminImage){
+            if(File::exists(public_path('uploads/admin/'.$admin->photo))){
+                File::delete(public_path('uploads/admin/'.$admin->photo));
+            }
+            $image = $request->file('adminImage');
+            $customeName = $id.'.'.$image->getClientOriginalExtension();
+            $path = public_path('uploads/admin/'.$customeName);
+            Image::make($image)->resize(300, 300)->save($path);
+            $admin->photo = $customeName;
+        }
+        $admin->save();
+        return back()->with('message', 'Admin Info Update Successfully');
+    }
+
     public function adminSocialLink(Request $request){
 
         echo $request;

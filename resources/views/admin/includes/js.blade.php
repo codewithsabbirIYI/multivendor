@@ -130,7 +130,17 @@
             });
         });
 
+        // admin imgae show buttom the input field
 
+        $('.adminImage').change(function (e) {
+            e.preventDefault();
+            let reader = new FileReader();
+            var file = document.querySelector('.adminImage').files[0];
+            reader.onload = function(e){
+                $('.imagePreview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(file);
+        });
     });
 </script>
 </body>

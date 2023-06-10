@@ -43,9 +43,11 @@ Route::middleware('auth', 'verified', 'role:admin')->group(function () {
     Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
     // admin profile Route
     Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
+    // admin profile update
+    Route::post('/admin/profile/update/{id}', [AdminController::class, 'profileUpdate'])->name('admin.profile.update');
 
     // admin social link insert Route
-    Route::post('/admin/social/link', [AdminController::class, 'adminSocialLink'])->name('admin.social.link');
+    Route::post('/admin/social/link/{id}', [AdminController::class, 'adminSocialLink'])->name('admin.social.link');
 
     });
 
