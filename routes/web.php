@@ -41,6 +41,11 @@ Route::middleware('auth', 'verified', 'role:admin')->group(function () {
         Route::get('/admin/dashboard', [AdminController::class, 'Index'])->name('admin.dashboard');
     // Admin Log In Route
     Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+    // admin profile Route
+    Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
+
+    // admin social link insert Route
+    Route::post('/admin/social/link', [AdminController::class, 'adminSocialLink'])->name('admin.social.link');
 
     });
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,14 @@ class AdminController extends Controller
     }
     public function registration(){
         return view('admin.registration');
+    }
+    public function profile(){
+        $adminInfo = User::find(Auth::user()->id);
+        return view('admin.profile', compact('adminInfo'));
+    }
+    public function adminSocialLink(Request $request){
+
+        echo $request;
     }
 
     public function index()
